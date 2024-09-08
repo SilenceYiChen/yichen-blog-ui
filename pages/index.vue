@@ -65,6 +65,33 @@ const handleClick = (data:string)=>{
           <el-tab-pane label="运维部署" name="second6"></el-tab-pane>
         </el-tabs>
       </div>
+      <div class="box-content flex between">
+        <div class="article-list">
+          <div class="item">
+            <div class="top">
+              <div class="header">
+                <div class="blogBaseInfo flex">
+                  <span class="topUp">置顶</span>
+                  <h4 class="blogTile">欢迎大家访问我的个人博客，沐雨橙风</h4>
+                </div>
+                <div class="desc">
+                  <span>
+                    使用LoadRunner自带的测试项目–航班订票管理系统WebTours，
+                    网站地址为：http://127.0.0.1:1080/WebTours/ (用户名为jojo，密码为bean),
+                    完成性能测试，要求：1、 虚拟用户为10；2、 每隔15s启动2个Vusers；
+                    3、 运行时间为5min；4、 每隔15s停止2个Vusers；5、在分析工具中自定义一个图形。
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cardGroup">
+          <div class="card prohibitAttackPrompt flex alignCenter center">
+            <img src="https://file.qcycloud.com/2.jpg"/>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -194,6 +221,84 @@ const handleClick = (data:string)=>{
     }
     .box{
       margin: 20px 0;
+      .box-content{
+        width: 100%;
+        div{
+          //border: 1px solid;
+        }
+        .article-list{
+          width: 70%;
+          .item{
+            border: 1px solid;
+            box-shadow: var(--el-box-shadow-light);
+            height: 190px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+            padding:10px 20px;
+            .top{
+              .header{
+                width: 68%;
+                .blogBaseInfo{
+                  .topUp{
+                    background-image: -webkit-linear-gradient(0deg, #3ca5f6 0, #a86af9 100%);
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    display: inline-block;
+                    border-top-right-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                    font-size: .9rem;
+                    margin-right: 5px;
+                    color: #fff;
+                    height: 20px;
+                    /* width: 38px;
+                     height: 17px;*/
+                  }
+                  .blogTile{
+
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; /* 显示2行 */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    line-height: 1.5em; /* 行高，根据需要调整 */
+                    max-height: 3em; /* 根据行高和行数计算总高度 */
+                  }
+                }
+                .desc{
+                  margin: 10px 0;
+                  color: #606266;
+                  font-size: 15px;
+                  overflow-wrap: break-word;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 3; /* 显示2行 */
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  line-height: 1.5em; /* 行高，根据需要调整 */
+                  max-height: 3em; /* 根据行高和行数计算总高度 */
+                }
+              }
+            }
+
+          }
+        }
+        .cardGroup{
+          width: 28%;
+          .card{
+            border-radius: 5px;
+            background-color: #fff;
+            min-height: 144px;
+            box-shadow: var(--el-box-shadow-light);
+          }
+          .prohibitAttackPrompt{
+            img{
+              width: 80%;
+              height: 80%;
+            }
+          }
+        }
+      }
     }
   }
 }
