@@ -1,37 +1,8 @@
 import {ref} from 'vue'
-export const fetchConfig = {
-    baseURL:"http://www.qcycloud.com/shiyi",
-    // baseURL:"http://localhost:8800/shiyi/",
-    // baseURL:'/api',
-    // headers:{
-    //     appid:"bd9d01ecc75dbbaaefce"
-    // },
+const fetchConfig = {
+    baseURL:"/api",
 }
-
-//请求体封装
-function useGetFetchOptions(options = {}){
-// @ts-ignore
-    options.baseURL = options.baseURL ?? fetchConfig.baseURL
-    // @ts-ignore
-    /*options.headers = options.headers ?? {
-        appid:fetchConfig.headers.appid
-    }*/
-    // @ts-ignore
-    options.initialCache = options.initialCache ?? false
-    // @ts-ignore
-    options.lazy = options.lazy ?? false
-
-    // 用户登录，默认传token
-    const token = useCookie("token")
-
-    if(token.value){
-        // @ts-ignore
-        options.headers.token = token.value
-    }
-
-    return options
-}
-export const getuuid = ()=>{
+export const getUUID = ()=>{
     var s = [];
     var hexDigits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for (var i = 0; i < 36; i++) {
@@ -44,40 +15,60 @@ export const getuuid = ()=>{
     let uuid = s.join("")
     return uuid
 }
-//http请求封装
-export async function useHttp(key:string,url:string,options = {}){
-    options = useGetFetchOptions(options)
+//请求体封装
+function useGetFetchOptions(options = {} ){
+// @ts-ignore
+    options.baseURL = options.baseURL ?? fetchConfig.baseURL
     // @ts-ignore
-    options.key = key;
-    let response = null;
-    let res:any = await useFetch(url,{
-        ...options,
-        // server:false,
-    })
-    console.log(res)
-    // 客户端错误处理
-    if(process.client && res.error.value||res.data.value.code!=200){
-        const msg = res.error.value?.data?.data
-        // @ts-ignore
-        if(!options.lazy){
-            console.log('服务端错误')
-        }
-    }
+    options.initialCache = options.initialCache ?? false
+    // @ts-ignore
+    options.lazy = options.lazy ?? false
+    // @ts-ignore
+    options['key'] = getUUID()
+    // 用户登录，默认传token
 
-    return res
+
+    return options
+}
+//http请求封装
+ function useHttp(url:string,options = {}){
+
+
+    return new Promise(async (resolve) => {
+        useFetch('/v1/article/', {
+            ...useGetFetchOptions(options),
+            onResponse:({response})=>{
+                resolve(response._data)
+            }
+        })
+
+
+    })
+
 
 }
 
 // GET请求
-export function useHttpGet(key:string,url:string,options = {}){
+function useHttpGet(url:string,options = {}){
     // @ts-ignore
     options.method = "GET"
-    return useHttp(key,url,options)
+    return useHttp(url,options)
 }
 
 // POST请求
-export function useHttpPost(key:string,url:string,options = {}){
+function useHttpPost(url:string,options = {}){
     // @ts-ignore
     options.method = "POST"
-    return useHttp(key,url,options)
+    return useHttp(url,options)
+}
+export default {
+    get:(url:string,params:any,options={})=>{
+        return useHttpGet(url,{query:params,...options})
+    },
+    post:(url:string,data:any,options:any)=>{
+        return useHttpPost(url,{
+            body:data,
+            ...options
+        })
+    }
 }

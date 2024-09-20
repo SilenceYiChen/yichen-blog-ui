@@ -16,11 +16,14 @@
     "@pinia/nuxt": "^0.5.4",
     "nuxt": "^3.13.0",
     "pinia": "^2.2.2",
+    "pinia-plugin-persistedstate": "^4.0.0",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "sass-embedded": "^1.78.0"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

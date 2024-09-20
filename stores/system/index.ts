@@ -33,5 +33,5 @@ export const useSystemStore = defineStore('useSystemStore', ()=>{
     }
 },{
     //@ts-ignore
-    persist:process.client
+    persist:true
 })

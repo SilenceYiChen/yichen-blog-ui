@@ -718,7 +718,7 @@
     pathe "^1.1.2"
     std-env "^3.7.0"
 
-"@nuxt/kit@^3.11.2", "@nuxt/kit@^3.12.2", "@nuxt/kit@^3.12.3", "@nuxt/kit@^3.12.4", "@nuxt/kit@^3.13.0", "@nuxt/kit@^3.9.0", "@nuxt/kit@3.13.1":
+"@nuxt/kit@^3.11.2", "@nuxt/kit@^3.12.3", "@nuxt/kit@^3.12.4", "@nuxt/kit@^3.13.0", "@nuxt/kit@^3.9.0", "@nuxt/kit@3.13.1":
   version "3.13.1"
   resolved "https://registry.npmmirror.com/@nuxt/kit/-/kit-3.13.1.tgz"
   integrity sha512-FkUL349lp/3nVfTIyws4UDJ3d2jyv5Pk1DC1HQUCOkSloYYMdbRcQAUcb4fe2TCLNWvHM+FhU8jnzGTzjALZYA==
@@ -1010,16 +1010,7 @@
     "@parcel/watcher-win32-ia32" "2.4.1"
     "@parcel/watcher-win32-x64" "2.4.1"
 
-"@pinia-plugin-persistedstate/nuxt@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmmirror.com/@pinia-plugin-persistedstate/nuxt/-/nuxt-1.2.1.tgz"
-  integrity sha512-q8s+4aQW/AjBMyeqLL48/qzBR5lcgnvvf1525ovNuKf6Wl9CsoLjPKh/5X8vNoKGwSow4gP7lVmdYPQRypgjgg==
-  dependencies:
-    "@nuxt/kit" "^3.12.2"
-    defu "^6.1.4"
-    pinia-plugin-persistedstate ">=3.2.1"
-
-"@pinia/nuxt@^0.5.0", "@pinia/nuxt@^0.5.4", "@pinia/nuxt@>=0.5.0":
+"@pinia/nuxt@^0.5.4", "@pinia/nuxt@>=0.5.0":
   version "0.5.4"
   resolved "https://registry.npmmirror.com/@pinia/nuxt/-/nuxt-0.5.4.tgz"
   integrity sha512-nNEs2pq6+Ji5qIyRwmeD9LUdctL8aJ8QMVLTYxUc16cXEOcIIN+MSA8Xudsd0lVETYgEAROT5HiBHnOYRDY3yQ==
@@ -5030,7 +5021,7 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.2, picomatch@^2.3.1:
   resolved "https://registry.npmmirror.com/picomatch/-/picomatch-4.0.2.tgz"
   integrity sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==
 
-pinia-plugin-persistedstate@>=3.2.1:
+pinia-plugin-persistedstate@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmmirror.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-4.0.0.tgz"
   integrity sha512-yTly/5XMwgd4hQmZOTAdeK3Kfz89h9TMS2/d0VzVJEL9v2LanZdjhckpwnE+jelL+vsT7DnRLmSOtkzSJjO6Ng==
@@ -6704,7 +6695,7 @@ vue-router@^4.0.0, vue-router@^4.4.0, vue-router@^4.4.3, vue-router@latest:
   dependencies:
     "@vue/devtools-api" "^6.6.3"
 
-"vue@^2.6.14 || ^3.3.0", "vue@^2.7.0 || ^3.2.25", vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.25, vue@^3.3.4, vue@^3.4.38, vue@^3.5.0, "vue@>=2.7 || >=3", vue@>=3, vue@3.5.3, vue@latest:
+vue@latest:
   version "3.5.3"
   resolved "https://registry.npmmirror.com/vue/-/vue-3.5.3.tgz"
   integrity sha512-xvRbd0HpuLovYbOHXRHlSBsSvmUJbo0pzbkKTApWnQGf3/cu5Z39mQeA5cZdLRVIoNf3zI6MSoOgHUT5i2jO+Q==

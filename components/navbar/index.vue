@@ -1,39 +1,56 @@
 <script setup lang="ts">
-import {useSystemStore} from '@/store'
+import {useSystemStore} from '@/stores'
 const systemStore = useSystemStore();
-const { isMobile } = useDevice();
 const drawer = computed(()=>systemStore.drawer)
+const routerPath = computed(()=>systemStore.routerPath)
 const openDrawer = ()=>{
   systemStore.setDrawer(!drawer.value)
 }
 </script>
 
 <template>
-<nav v-if="!isMobile" class="navBar flex alignCenter">
+<nav v-if="!$device.isMobile" class="navBar flex alignCenter">
   <div class="logo flex alignCenter">
     <img src="@/assets/images/logo.png"/>
     <span>逸辰时光</span>
   </div>
   <div class="list flex alignCenter">
-    <div class="item hand-style flex alignCenter between">
-      <Icon name="my-icon:home"></Icon>
-      <span>首页</span>
-    </div>
-    <div class="item hand-style flex alignCenter between">
-      <Icon name="my-icon:archive"></Icon>
-      <span>分类</span>
-    </div>
-    <div class="item hand-style flex alignCenter between">
-      <Icon name="my-icon:link"></Icon>
-      <span>友情链接</span>
-    </div>
-    <div class="item hand-style flex alignCenter between">
-      <Icon name="my-icon:about"></Icon>
-      <span>关于本站</span>
-    </div>
+    <nuxt-link href="/">
+      <div class="item hand-style flex alignCenter between"
+           :class="{
+            active:routerPath==='/'
+          }"
+      >
+        <Icon name="my-icon:home"></Icon>
+        <span>首页</span>
+      </div>
+    </nuxt-link>
+    <nuxt-link href="/article">
+      <div class="item hand-style flex alignCenter between"
+      :class="{
+        active:routerPath==='/article'
+      }"
+      >
+        <Icon name="my-icon:archive"></Icon>
+        <span>分类</span>
+      </div>
+    </nuxt-link>
+    <nuxt-link>
+      <div class="item hand-style flex alignCenter between">
+        <Icon name="my-icon:link"></Icon>
+        <span>友情链接</span>
+      </div>
+    </nuxt-link>
+    <nuxt-link>
+      <div class="item hand-style flex alignCenter between">
+        <Icon name="my-icon:about"></Icon>
+        <span>关于本站</span>
+      </div>
+    </nuxt-link>
+
   </div>
 </nav   >
-<nav v-else class="mobileNavBar flex alignCenter between">
+<nav class="mobileNavBar flex alignCenter between">
   <Icon name="my-icon:menu" @click="openDrawer"></Icon>
     <div class="logo flex alignCenter">
       <img src="@/assets/images/logo.png"/>
@@ -101,7 +118,16 @@ const openDrawer = ()=>{
 
   }
 }
+@media screen and (max-width: 1118px) {
+  .navBar{
+    display: none;
+  }
+  .mobileNavBar{
+    display: flex !important;
+  }
+}
 .mobileNavBar{
+  display: none;
   position: sticky;
   top: 0;
   width: 100%;

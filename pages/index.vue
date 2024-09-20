@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {test} from '@/api/index'
 const bannerList = [
     'https://file.qcycloud.com/banner/1.png',
     'https://file.qcycloud.com/banner/2.jpg',
@@ -8,6 +9,12 @@ const activeName = 'second1';
 const handleClick = (data:string)=>{
   console.log(data)
 }
+test({
+  pageNo:1,
+  pageSize:10
+}).then(res=>{
+  console.log("res",res)
+})
 </script>
 
 <template>
@@ -24,35 +31,14 @@ const handleClick = (data:string)=>{
           </el-carousel-item>
         </el-carousel>
       </div>
-      <div class="authorInfo">
-        <div class="card info">
-          <div class="avatar">
-            <img class="bg" src="https://file.qcycloud.com/beijing.jpg"/>
-            <img  class="avatarImg" src="@/assets/images/logo.png"/>
-          </div>
-          <div class="bottom">
-            <div class="authorName flex alignCenter center">
-              <span>Silence逸辰</span>
-              <Icon name="my-icon:bozhu"/>
-            </div>
-            <div class="desc flex alignCenter center">
-              <span>擅长VUE全家桶开发,个人汪苏泷唯粉</span>
-            </div>
-            <div class="contact flex alignCenter center">
-              <Icon name="my-icon:gitee" title="gitee"/>
-            </div>
-            <div class="addTag flex alignCenter center">
-              <el-button type="primary">
-                加入标签
-              </el-button>
-            </div>
-          </div>
-        </div>
-        <div class="ad">
+      <div class="authorInfo" v-if="!$device.isMobile">
+        <AuthorInfo/>
+        <div class="ad imgZoom">
           <img src="https://file.qcycloud.com/20231010_1696930367538.jpg"/>
           <span>高效便宜可靠的服务器</span>
         </div>
       </div>
+
     </div>
     <div class="box">
       <div class="tabs">
@@ -67,12 +53,17 @@ const handleClick = (data:string)=>{
       </div>
       <div class="box-content flex between">
         <div class="article-list">
-          <div class="item">
-            <div class="top">
+          <div class="item flex column between scale-up-center"
+          v-for="item in 10"
+               :key="item"
+          >
+            <div class="top flex between">
               <div class="header">
                 <div class="blogBaseInfo flex">
                   <span class="topUp">置顶</span>
-                  <h4 class="blogTile">欢迎大家访问我的个人博客，沐雨橙风</h4>
+                  <nuxt-link href="/article/1.html">
+                    <h4 class="blogTile">欢迎大家访问我的个人博客，逸辰时光</h4>
+                  </nuxt-link>
                 </div>
                 <div class="desc">
                   <span>
@@ -83,12 +74,98 @@ const handleClick = (data:string)=>{
                   </span>
                 </div>
               </div>
+              <el-image  src="https://file.qcycloud.com/20240123_1705973581037.png"
+                         class="blog-cover imgZoom"
+                         v-if="!$device.isMobile"
+              >
+                <template #error>
+                  <div class="image-slot">
+                    <img src="https://file.qcycloud.com/20240123_1705973581037.png"
+                    style="width: 100%;height: 100%"
+                    />
+                  </div>
+                </template>
+              </el-image>
+            </div>
+            <div class="authorInfo flex alignCenter between">
+              <div class="left flex alignCenter">
+                <div class="authorName flex alignCenter">
+                  <img src="@/assets/images/logo.png"/>
+                  <span>Silence逸辰</span>
+                </div>
+                <div class="tags">
+                  <el-space>
+                    <el-tag effect="light">
+                      前端
+                    </el-tag>
+                    <el-tag effect="light">
+                      前端
+                    </el-tag>
+                    <el-tag effect="light">
+                      前端
+                    </el-tag>
+                  </el-space>
+
+                </div>
+              </div>
+              <div class="right">
+                <el-space>
+                  <div class="icon flex alignCenter">
+                    <Icon name="my-icon:view"/>
+                    <span>10</span>
+                  </div>
+                  <div class="icon flex alignCenter">
+                    <Icon name="my-icon:time"/>
+                    <span>2024-09-09-14:54:33</span>
+                  </div>
+                </el-space>
+              </div>
+            </div>
+            <div class="originFlag">
+              <span>原创</span>
             </div>
           </div>
         </div>
-        <div class="cardGroup">
+        <div class="cardGroup" v-if="!$device.isMobile">
           <div class="card prohibitAttackPrompt flex alignCenter center">
             <img src="https://file.qcycloud.com/2.jpg"/>
+          </div>
+          <div class="card recommend">
+            <div class="header">
+              推荐文章
+            </div>
+            <div class="list">
+              <div class="item flex alignCenter between"
+              v-for="item in 5"
+                   :key="item"
+              >
+                <div class="left">
+                  <div :class="'ranking color'+item"
+
+                  >
+                    <span>{{item}}</span>
+                  </div>
+                  <el-image  src="https://file.qcycloud.com/20240123_1705973581037.png"
+                             class="blog-cover imgZoom"
+                             v-if="!$device.isMobile"
+                  >
+                    <template #error>
+                      <div class="image-slot">
+                        <img src="https://file.qcycloud.com/20240123_1705973581037.png"
+                             style="width: 100%;height: 100%"
+                        />
+                      </div>
+                    </template>
+                  </el-image>
+                </div>
+                <div class="right multiline-ellipsis-txt">
+                  <nuxt-link href="/article/2.html">
+                    <span class="title">推荐文章推荐文章推荐文章推荐文章</span>
+                  </nuxt-link>
+                  <span class="time">2024-09-10 10:24:35</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -127,73 +204,6 @@ const handleClick = (data:string)=>{
         width: 28%;
         height: 420px;
         overflow: hidden;
-        .info{
-          border-radius: 10px;
-          height: 251px;
-          overflow: hidden;
-          .avatar{
-            height: 120px;
-            align-items: end;
-            position: relative;
-            .bg{
-              width: 100%;
-              height: 100%;
-              border-top-left-radius: 10px;
-              border-top-right-radius: 10px;
-            }
-            .avatarImg{
-              box-sizing: border-box;
-              width: 68px;
-              height: 68px;
-              border-radius: 50%;
-              border: 2px solid #fff;
-              position: absolute;
-              bottom: 5px;
-              left: calc(100% / 2 - 34px);
-            }
-          }
-          .bottom{
-            background-color: #fff;
-            height:calc(100% - 120px);
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            padding: 5px 0;
-            .authorName{
-              span{
-                color: var(--theme-color);
-                margin-right: 5px;
-                font-size: 16px;
-                font-weight: 500;
-              }
-            }
-            .desc{
-              margin: 5px 0;
-              span{
-                background: radial-gradient(circle at 49.86% 48.37%,#0090ff 0,#0089ff,#3a82ff,#717aff,#9371fb,#ae67ef,#c45de1,#d652d2,#e448c2,#ef3eb0,#f7369e,#fd318c,#ff317a,#ff3569,#fd3d57,#f94646,#f35035,#ea5a22,#e16308,#d56d00,#c97500,#bb7d00,#ac8300,#9d8900,#8c8f00,#7a9300,#669700,#4f9b00,#309e0e,#00a029,#00a23d);
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                font-size: 14px;
-
-              }
-            }
-            .contact{
-              min-width: 40%;
-              border-top: 1px solid var(--border-line);
-              margin: 5px auto;
-              padding-top: 10px;
-            }
-            .addTag{
-              width: 80%;
-              margin:5px auto;
-              :deep(.el-button){
-                width: 100%;
-              }
-            }
-          }
-        }
         .ad{
           width: 100%;
           height: calc(100% - 270px);
@@ -228,15 +238,20 @@ const handleClick = (data:string)=>{
         }
         .article-list{
           width: 70%;
+
           .item{
-            border: 1px solid;
+
+
             box-shadow: var(--el-box-shadow-light);
-            height: 190px;
+            height: 170px;
             margin-bottom: 10px;
             border-radius: 5px;
             background-color: #fff;
-            padding:10px 20px;
+            padding:15px 20px;
+            position: relative;
             .top{
+              height: 120px;
+              overflow: hidden;
               .header{
                 width: 68%;
                 .blogBaseInfo{
@@ -255,7 +270,7 @@ const handleClick = (data:string)=>{
                      height: 17px;*/
                   }
                   .blogTile{
-
+                    position: relative;
                     display: -webkit-box;
                     -webkit-line-clamp: 2; /* 显示2行 */
                     -webkit-box-orient: vertical;
@@ -263,24 +278,119 @@ const handleClick = (data:string)=>{
                     text-overflow: ellipsis;
                     line-height: 1.5em; /* 行高，根据需要调整 */
                     max-height: 3em; /* 根据行高和行数计算总高度 */
+                    color: #000;
+                  }
+                  .blogTile::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: #000;
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.5s ease;
+                  }
+
+                  .blogTile:hover::after {
+                    transform: scaleX(1);
+                  }
+
+                  /* 添加动画效果，使得线条最后在右边消失 */
+                  @keyframes slide-out {
+                    0% {
+                      transform: scaleX(1);
+                      transform-origin: left;
+                    }
+                    100% {
+                      transform: scaleX(0);
+                      transform-origin: right;
+                    }
+                  }
+
+                  .blogTile::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: #000;
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.5s ease;
+                    z-index: -1; /* 保证动画在文本下方 */
+                  }
+
+                  .blogTile:not(:hover)::before {
+                    animation: slide-out 0.5s forwards;
                   }
                 }
                 .desc{
                   margin: 10px 0;
                   color: #606266;
                   font-size: 15px;
+                  overflow: hidden;
                   overflow-wrap: break-word;
                   display: -webkit-box;
-                  -webkit-line-clamp: 3; /* 显示2行 */
+                  -webkit-line-clamp: 4; /* 显示2行 */
                   -webkit-box-orient: vertical;
-                  overflow: hidden;
                   text-overflow: ellipsis;
-                  line-height: 1.5em; /* 行高，根据需要调整 */
-                  max-height: 3em; /* 根据行高和行数计算总高度 */
+                  line-height: 20px; /* 行高，根据需要调整 */
+
+                }
+              }
+              .blog-cover{
+                width: 182px;
+                height: 118px;
+                border-radius: 5px;
+                border: 1px solid #e4e7ed;
+              }
+            }
+            .authorInfo{
+              .left{
+                img{
+                  width: 25px;
+                  height: 25px;
+                  border-radius: 50%;
+                  margin-right: 10px;
+                }
+                span{
+                  font-size: 15px;
+                  margin-right: 10px;
+                  color: var(--theme-color);
+                }
+              }
+              .right{
+                .iconify{
+                  font-size: 14px !important;
+                  margin-right: 3px;
+                }
+                span{
+                  font-size: .8rem;
                 }
               }
             }
-
+            .originFlag{
+              width: 50px;
+              height: 50px;
+              background-color: #40c9c6;
+              clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+              position: absolute;
+              right: 0;
+              top: 0;
+              color: #fff;
+              font-size: 14px;
+              span{
+                position: absolute;
+                color: #fff;
+                top: 8px;
+                left: 50%;
+                font-size: 12px;
+                transform: rotate(50deg);
+              }
+            }
           }
         }
         .cardGroup{
@@ -290,6 +400,7 @@ const handleClick = (data:string)=>{
             background-color: #fff;
             min-height: 144px;
             box-shadow: var(--el-box-shadow-light);
+            margin-bottom: 10px;
           }
           .prohibitAttackPrompt{
             img{
@@ -297,10 +408,75 @@ const handleClick = (data:string)=>{
               height: 80%;
             }
           }
+          .recommend{
+            padding: 10px 20px;
+            .header{
+              color: var(--theme-color);
+              font-weight: bold;
+              border-bottom: 1px solid #f0f0f4;
+              padding-bottom: 10px;
+            }
+            .list{
+              .item{
+                margin: 20px 0;
+                  .left{
+                    position: relative;
+                    .blog-cover{
+                      width: 120px;
+                      height: 75px;
+                      border-radius: 5px;
+                    }
+                    .ranking{
+                      position: absolute;
+                      display: inline-block;
+                      width: 30px;
+                      border-radius: 2px 8px 8px 2px;
+                      text-align: right;
+                      padding-right: 5px;
+                      font-weight: 700;
+                      color: #fff;
+                      margin-top: 5px;
+                      z-index: 50;
+                      background-color: #818b95;
+                      &.color1{
+                        background-color: #f56c6c;
+                      }
+                      &.color2{
+                        background-color: #ffa41b;
+                      }
+                      &.color3{
+                        background-color: #02a0f8;
+                      }
+                    }
+                  }
+                .right{
+                  width: calc(100% - 120px);
+                  color: #303133;
+                  .title{
+                    font-size: 14px;
+                    color: #303133;
+                  }
+                  .time{
+                    margin-top: 20px;
+                    font-size: 12px;
+                    white-space: nowrap;
+                    display: inline-block;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
   }
+}
+@media screen and (max-width: 750px){
+    .banner{
+      :deep(.el-carousel__container){
+        height: 200px !important;
+      }
+    }
 }
 @media screen and (max-width: 1118px){
   .home{
@@ -313,13 +489,159 @@ const handleClick = (data:string)=>{
         .banner{
           width: 100%;
           :deep(.el-carousel__container){
-            height: 200px;
+            height: 420px;
           }
         }
         .authorInfo{
          display: none;
         }
       }
+      .box{
+        margin: 20px 0;
+        .box-content{
+          width: 100%;
+          div{
+            //border: 1px solid;
+          }
+          .article-list{
+            width: 100%;
+            .item{
+              box-shadow: var(--el-box-shadow-light);
+              height: 170px;
+              margin-bottom: 10px;
+              border-radius: 5px;
+              background-color: #fff;
+              padding:15px 20px;
+              .top{
+                height: 120px;
+                overflow: hidden;
+                .header{
+                  width: 100%;
+                  .blogBaseInfo{
+                    flex-wrap: wrap;
+                    .topUp{
+                      white-space: nowrap;
+                      background-image: -webkit-linear-gradient(0deg, #3ca5f6 0, #a86af9 100%);
+                      padding-left: 5px;
+                      padding-right: 5px;
+                      display: inline-block;
+                      border-top-right-radius: 5px;
+                      border-bottom-left-radius: 5px;
+                      font-size: .9rem;
+                      margin-right: 5px;
+                      color: #fff;
+                      height: 20px;
+                      /* width: 38px;
+                       height: 17px;*/
+                    }
+                    .blogTile{
+                      position: relative;
+                      display: -webkit-box;
+                      -webkit-line-clamp: 2; /* 显示2行 */
+                      -webkit-box-orient: vertical;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      line-height: 1.5em; /* 行高，根据需要调整 */
+                      max-height: 3em; /* 根据行高和行数计算总高度 */
+                      color: #000;
+                    }
+                    .blogTile::after {
+                      content: '';
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 2px;
+                      background-color: #000;
+                      transform: scaleX(0);
+                      transform-origin: left;
+                      transition: transform 0.5s ease;
+                    }
+
+                    .blogTile:hover::after {
+                      transform: scaleX(1);
+                    }
+
+                    /* 添加动画效果，使得线条最后在右边消失 */
+                    @keyframes slide-out {
+                      0% {
+                        transform: scaleX(1);
+                        transform-origin: left;
+                      }
+                      100% {
+                        transform: scaleX(0);
+                        transform-origin: right;
+                      }
+                    }
+
+                    .blogTile::before {
+                      content: '';
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 2px;
+                      background-color: #000;
+                      transform: scaleX(0);
+                      transform-origin: left;
+                      transition: transform 0.5s ease;
+                      z-index: -1; /* 保证动画在文本下方 */
+                    }
+
+                    .blogTile:not(:hover)::before {
+                      animation: slide-out 0.5s forwards;
+                    }
+                  }
+                  .desc{
+                    margin: 10px 0;
+                    color: #606266;
+                    font-size: 15px;
+                    overflow: hidden;
+                    overflow-wrap: break-word;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3; /* 显示2行 */
+                    -webkit-box-orient: vertical;
+                    text-overflow: ellipsis;
+                    line-height: 20px; /* 行高，根据需要调整 */
+
+                  }
+                }
+
+              }
+              .authorInfo{
+                flex-wrap: wrap;
+                .left{
+                  img{
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                  }
+                  span{
+                    font-size: 15px;
+                    margin-right: 10px;
+                    color: var(--theme-color);
+                  }
+                }
+                .right{
+                  margin-top: 5px;
+                  .iconify{
+                    font-size: 14px !important;
+                    margin-right: 3px;
+                  }
+                  span{
+                    font-size: .8rem;
+                  }
+                }
+              }
+            }
+          }
+          .cardGroup{
+            display: none;
+          }
+        }
+      }
+
     }
   }
 }
