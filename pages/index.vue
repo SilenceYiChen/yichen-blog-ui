@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {test} from '@/api/index'
+import {queryArticleList} from '@/api/index'
 const bannerList = [
     'https://file.qcycloud.com/banner/1.png',
     'https://file.qcycloud.com/banner/2.jpg',
@@ -54,15 +54,15 @@ test({
       <div class="box-content flex between">
         <div class="article-list">
           <div class="item flex column between scale-up-center"
-          v-for="item in 10"
-               :key="item"
+          v-for="item in list"
+               :key="item.id"
           >
             <div class="top flex between">
               <div class="header">
                 <div class="blogBaseInfo flex">
                   <span class="topUp">置顶</span>
                   <nuxt-link href="/article/1.html">
-                    <h4 class="blogTile">欢迎大家访问我的个人博客，逸辰时光</h4>
+                    <h4 class="blogTile">{{item.title}}</h4>
                   </nuxt-link>
                 </div>
                 <div class="desc">
