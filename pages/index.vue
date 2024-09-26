@@ -9,7 +9,7 @@ const activeName = 'second1';
 const handleClick = (data:string)=>{
   console.log(data)
 }
-test({
+queryArticleList({
   pageNo:1,
   pageSize:10
 }).then(res=>{
