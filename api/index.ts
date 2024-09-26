@@ -1,7 +1,6 @@
-import httpRequest from '@/composables/http'
-export const test = (params:any)=>{
-    return httpRequest.get("/v1/article/",params,{
-        lazy:false
+// import httpRequest from '@/composables/http'
+import {useHttpGet} from "~/composables/http";
 
-    })
+export const queryArticleList = (params:any)=>{
+    return useHttpGet("/frontend/article/list","/frontend/article/list",{params})
 }

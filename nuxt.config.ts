@@ -3,6 +3,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
+  ssr:true,
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
@@ -52,10 +53,14 @@ export default defineNuxtConfig({
   },
   nitro: {
     devProxy: {
-      "/api": {
+      /*"/api": {
         target: "https://www.qcycloud.com/qcy-blog/",
         changeOrigin: true,
-      },
+      },*/
+      '/api': {
+        target: 'http://localhost:9001/qcy-blog',
+        changeOrigin: true,
+      }
     }
   },
 
