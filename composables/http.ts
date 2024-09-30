@@ -1,6 +1,6 @@
 import {ref} from 'vue'
 const fetchConfig = {
-    baseURL:"/api",
+    baseURL:"/qcy-blog",
 }
 export const getUUID = ()=>{
     var s = [];
@@ -35,7 +35,7 @@ function useGetFetchOptions(options = {} ){
 
 
     return new Promise(async (resolve) => {
-        useFetch('/v1/article/', {
+        useFetch(url, {
             ...useGetFetchOptions(options),
             onResponse:({response})=>{
                 resolve(response._data)

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import {ref} from 'vue'
 import {queryArticleList} from '@/api/index'
+
 const bannerList = [
     'https://file.qcycloud.com/banner/1.png',
     'https://file.qcycloud.com/banner/2.jpg',
@@ -9,11 +11,27 @@ const activeName = 'second1';
 const handleClick = (data:string)=>{
   console.log(data)
 }
-queryArticleList({
-  pageNo:1,
-  pageSize:10
-}).then(res=>{
-  console.log("res",res)
+
+let list = ref([]);
+async function fetchData() {
+  try {
+    const response:any = await $fetch('/qcy-blog/frontend/article/list',{
+      query:{
+        pageNo:1,
+        pageSize:10
+      }
+    });
+    list.value = response.result.records
+
+    console.log(response)
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+fetchData();
+onMounted( ()=>{
+
+
 })
 </script>
 

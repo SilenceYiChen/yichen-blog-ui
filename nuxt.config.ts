@@ -53,15 +53,12 @@ export default defineNuxtConfig({
   },
   nitro: {
     devProxy: {
-      /*"/api": {
-        target: "https://www.qcycloud.com/qcy-blog/",
-        changeOrigin: true,
-      },*/
-      '/api': {
+      '/qcy-blog': {
         target: 'http://localhost:9001/qcy-blog',
         changeOrigin: true,
       }
     }
   },
+
 
 })
